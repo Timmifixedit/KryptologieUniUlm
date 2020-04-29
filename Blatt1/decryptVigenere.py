@@ -88,11 +88,11 @@ def break_caesar(symbols):
     for i in range(26):
         caesar_candiate = decrypt(char_list_to_str(symbols), chr(i + ord('a')))
         s_freq = most_frequent_symbols(caesar_candiate)
-        error = 0
+        coincidence_index = 0
         for s in s_freq.keys():
-            error += s_freq[s] * german_freqs[s] / 100
+            coincidence_index += s_freq[s] * german_freqs[s] / 100
 
-        possible_keys[chr(i + ord('a'))] = error
+        possible_keys[chr(i + ord('a'))] = coincidence_index
 
     return {key: value for key, value in sorted(possible_keys.items(),
                                                 key=lambda item: item[1], reverse=True)}

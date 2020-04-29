@@ -1,0 +1,116 @@
+\documentclass[DIN, pagenumber=false, fontsize=11pt, parskip=half]{scrartcl}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc} 
+\usepackage{commath}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{tikz-timing}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{xstring}
+\usepackage{circuitikz}
+\usepackage{listings}
+\usepackage[final]{pdfpages}
+\usepackage{subcaption}
+\usepackage{import}
+\usepackage{cleveref}
+\usepackage{bm}
+
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\ZZ}{\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}}
+\newcommand{\gq}[1]{\grqq #1\glqq}
+
+%---------------------Stolen from https://github.com/aul12/Kryptologie/blob/master/Uebung01/main.tex
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\newcommand\pythonstyle{\lstset{
+    language=Python,
+    basicstyle=\scriptsize,
+    otherkeywords={self},             % Add keywords here
+    keywordstyle=\color{deepblue},
+    emph={MyClass,__init__},          % Custom highlighting
+    emphstyle=\color{deepred},    % Custom highlighting style
+    stringstyle=\color{deepgreen},
+    frame=tb,                         % Any extra options here
+    showstringspaces=false,            % 
+}}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+%--------------------------------------
+
+\title{Kryptologie Blatt 1}
+\author{Tim Luchterhand}
+
+\begin{document}
+    \maketitle
+    \setcounter{section}{1}
+    \section{Affine Verschlüsselung}
+    \begin{enumerate}
+        \item Es gibt $\varphi(26) = 12$ verschiedene Möglichkeiten für $k_1$ und 26 verschiedene Möglichkeiten für $k_2$. Insgesamt
+              gibt es also $12 \cdot 26 = 312$ verschiedene Schlüssel $k$.
+        \item Damit $E$ injektiv ist, muss gelten $\text{ggT}(k_1, 26) \stackrel{!}{=} 1$. Dann $\exists \bar{k_1} : k_1 \cdot 
+              \bar{k_1} \equiv 1 \mod 26$. $k_2 \in \{0, \dots, 25\} =: K_2$ darf beliebig gewählt werden. $k_2 \in \Z \setminus K_2$
+              wäre auch zulässig, allerdings $\forall k_2 \in \Z \setminus K_2 \ \exists \tilde{k_2} \in K_2 : k_2 \equiv \tilde{k_2} \mod 26$.
+        \item Für $D(k, x)$ gilt allgemein:
+              \begin{equation*}
+                  D(k, x) = \bar{k_1} (x - k_2) \mod 26, \ \text{mit} \ \bar{k_1} \ \text{dem miltiplikativem Inversen zu} \ k_1
+              \end{equation*}
+              Für $k = (3, 5)$ gilt im speziellen $\bar{k_1} = 9$, denn $9 \cdot 3 = 27 \equiv 1 \mod 26$.
+              $D$ ist eindeutig, da
+              \begin{align*}
+                  D\left(k, E(k, x)\right) &= \bar{k_1} \left(E(k, x) - k_2\right) \mod 26 \\
+                  &\equiv \bar{k_1} \left(k_1 x + k_2 - k_2 \right) \mod 26 \\
+                  &\equiv \bar{k_1} k_1 x \mod 26 \\
+                  &\equiv x \mod 26
+              \end{align*}
+
+    \end{enumerate}
+    \newpage
+    \section{Viginère-Verschlüsselung}
+    Diese Aufgabe wurde am Computer mithilfe von Python gelöst. Der Code ist dieser Abgabe als 'decryptVigenere.py' angefügt. Der Quellcode ist
+    außerdem am Ende des Dokuments zu sehen. Die Ausgabe des Skripts ist:
+    \begin{lstlisting}
+Following triples exist multiple times:
+[('qgy', 2), ('gyx', 2), ('yxo', 2), ('oqg', 2)]
+The distances between these triplets are
+[25, 25, 25, 35]
+Therefore the most likely key length is 5
+Analysis of the symbol frequencies yields following possible keys:
+most likely
+['l', 'm', 'c', 'h', 't']
+second most likely
+['m', 'i', 'l', 'u', 'p']
+One can easily see that the keyword must be 'licht'. 
+The decrypted text is:
+manrasieredenkopfdesbotentaetowierediebotschaftinseine
+kopfhautwartebisdiehaarenachgewachsensindundschickeihnaufdiereise
+    \end{lstlisting}
+
+    Quellcode:
+    \pythonexternal{decryptVigenere.py}
+\end{document}

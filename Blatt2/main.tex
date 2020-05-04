@@ -39,7 +39,7 @@
     \section{Entropie}
     \begin{enumerate}
         \item 
-            \begin{eqnarray}
+            \begin{eqnarray*}
                 \ZZ \ \Ent(X | Y) &=& \Ent(X, Y) - \Ent(Y) \\
                 \Ent(X | Y) &\stackrel{\text{Def}}{=}& \sum_y{p(y) \Ent(X | Y = y)} \\
                 &\stackrel{\text{Def}}{=}& - \sum_y{p(y) \sum_x{p(x | Y = y) \log_2\left(p(x | Y = 0)\right)}} \\
@@ -51,7 +51,7 @@
                 &=& \Ent(X, Y) + \sum_y{\log_2\left(p(y)\right) \sum_x{p(x, y) }} \\
                 &\stackrel{\text{Marginalisierung}}{=}& \Ent(X, Y) + \sum_y{\log_2\left(p(y)\right) p(y)} \\
                 &\stackrel{\text{Def } \Ent(Y)}{=}& \Ent(X, Y) - \Ent(Y)
-            \end{eqnarray}
+            \end{eqnarray*}
         \item
             \begin{eqnarray*}
                 \ZZ \ \Ent(X) &\leq& \Ent(X, Y) \\

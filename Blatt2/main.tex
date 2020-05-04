@@ -37,17 +37,29 @@
     \maketitle
     \setcounter{section}{1}
     \section{Entropie}
-    \begin{eqnarray}
-        \ZZ \ \Ent(X | Y) &=& \Ent(X, Y) - \Ent(Y) \\
-        \Ent(X | Y) &\stackrel{\text{Def}}{=}& \sum_y{p(y) \Ent(X | Y = y)} \\
-        &\stackrel{\text{Def}}{=}& - \sum_y{p(y) \sum_x{p(x | Y = y) \log_2\left(p(x | Y = 0)\right)}} \\
-        &=& - \sum_y{\sum_x{p(y) p(x | Y = y) \log_2\left(p(x | Y = 0)\right)}} \\
-        &\stackrel{\text{Prod. Regel}}{=}& - \sum_y{\sum_x{p(x, y) \log_2\left(p(x | Y = 0)\right)}} \\
-        &\stackrel{\text{Def bed. Wahrsch.}}{=}& - \sum_y{\sum_x{p(x, y) \log_2\left(\frac{p(x,y)}{p(y)}\right)}} \\
-        &=& - \sum_y{\sum_x{p(x, y) \left(\log_2\left(p(x, y)\right) - \log_2\left(p(y)\right)\right)}} \\
-        &\stackrel{\text{Def } \Ent(X, Y)}{=}& \Ent(X, Y) + \sum_y{\sum_x{p(x, y) \log_2\left(p(y)\right)}} \\
-        &=& \Ent(X, Y) + \sum_y{\log_2\left(p(y)\right) \sum_x{p(x, y) }} \\
-        &\stackrel{\text{Marginalisierung}}{=}& \Ent(X, Y) + \sum_y{\log_2\left(p(y)\right) p(y)} \\
-        &\stackrel{\text{Def } \Ent(Y)}{=}& \Ent(X, Y) - \Ent(Y)
-    \end{eqnarray}
+    \begin{enumerate}
+        \item 
+            \begin{eqnarray}
+                \ZZ \ \Ent(X | Y) &=& \Ent(X, Y) - \Ent(Y) \\
+                \Ent(X | Y) &\stackrel{\text{Def}}{=}& \sum_y{p(y) \Ent(X | Y = y)} \\
+                &\stackrel{\text{Def}}{=}& - \sum_y{p(y) \sum_x{p(x | Y = y) \log_2\left(p(x | Y = 0)\right)}} \\
+                &=& - \sum_y{\sum_x{p(y) p(x | Y = y) \log_2\left(p(x | Y = 0)\right)}} \\
+                &\stackrel{\text{Prod. Regel}}{=}& - \sum_y{\sum_x{p(x, y) \log_2\left(p(x | Y = 0)\right)}} \\
+                &\stackrel{\text{Def bed. Wahrsch.}}{=}& - \sum_y{\sum_x{p(x, y) \log_2\left(\frac{p(x,y)}{p(y)}\right)}} \\
+                &=& - \sum_y{\sum_x{p(x, y) \left(\log_2\left(p(x, y)\right) - \log_2\left(p(y)\right)\right)}} \\
+                &\stackrel{\text{Def } \Ent(X, Y)}{=}& \Ent(X, Y) + \sum_y{\sum_x{p(x, y) \log_2\left(p(y)\right)}} \\
+                &=& \Ent(X, Y) + \sum_y{\log_2\left(p(y)\right) \sum_x{p(x, y) }} \\
+                &\stackrel{\text{Marginalisierung}}{=}& \Ent(X, Y) + \sum_y{\log_2\left(p(y)\right) p(y)} \\
+                &\stackrel{\text{Def } \Ent(Y)}{=}& \Ent(X, Y) - \Ent(Y)
+            \end{eqnarray}
+        \item
+            \begin{eqnarray*}
+                \ZZ \ \Ent(X) &\leq& \Ent(X, Y) \\
+                \Ent(Y | X) &\stackrel{1.}{=}& \Ent(Y, X) - \Ent(X) \\
+                &=& \Ent(X, Y) - H(X) \\
+                &\Leftrightarrow& \Ent(x) = \Ent(X, Y) - \Ent(Y | X) \\
+                &\stackrel{\Ent > 0}{\leq}& \Ent(X, Y)
+            \end{eqnarray*}
+    \end{enumerate}
+
 \end{document}

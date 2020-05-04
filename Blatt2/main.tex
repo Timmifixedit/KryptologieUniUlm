@@ -1,0 +1,53 @@
+\documentclass[DIN, pagenumber=false, fontsize=11pt, parskip=half]{scrartcl}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc} 
+\usepackage{commath}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{tikz-timing}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{xstring}
+\usepackage{circuitikz}
+\usepackage{listings}
+\usepackage[final]{pdfpages}
+\usepackage{subcaption}
+\usepackage{import}
+\usepackage{cleveref}
+\usepackage{bm}
+
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\ZZ}{\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}}
+\newcommand{\gq}[1]{\grqq #1\glqq}
+\newcommand{\Ent}{\text{H}}
+
+
+\title{Kryptologie Blatt 2}
+\author{Tim Luchterhand}
+
+\begin{document}
+    \maketitle
+    \setcounter{section}{1}
+    \section{Entropie}
+    \begin{eqnarray}
+        \ZZ \ \Ent(X | Y) &=& \Ent(X, Y) - \Ent(Y) \\
+        \Ent(X | Y) &\stackrel{\text{Def}}{=}& \sum_y{p(y) \Ent(X | Y = y)} \\
+        &\stackrel{\text{Def}}{=}& - \sum_y{p(y) \sum_x{p(x | Y = y) \log_2\left(p(x | Y = 0)\right)}} \\
+        &=& - \sum_y{\sum_x{p(y) p(x | Y = y) \log_2\left(p(x | Y = 0)\right)}} \\
+        &\stackrel{\text{Prod. Regel}}{=}& - \sum_y{\sum_x{p(x, y) \log_2\left(p(x | Y = 0)\right)}} \\
+        &\stackrel{\text{Def bed. Wahrsch.}}{=}& - \sum_y{\sum_x{p(x, y) \log_2\left(\frac{p(x,y)}{p(y)}\right)}} \\
+        &=& - \sum_y{\sum_x{p(x, y) \left(\log_2\left(p(x, y)\right) - \log_2\left(p(y)\right)\right)}} \\
+        &\stackrel{\text{Def } \Ent(X, Y)}{=}& \Ent(X, Y) + \sum_y{\sum_x{p(x, y) \log_2\left(p(y)\right)}} \\
+        &=& \Ent(X, Y) + \sum_y{\log_2\left(p(y)\right) \sum_x{p(x, y) }} \\
+        &\stackrel{\text{Marginalisierung}}{=}& \Ent(X, Y) + \sum_y{\log_2\left(p(y)\right) p(y)} \\
+        &\stackrel{\text{Def } \Ent(Y)}{=}& \Ent(X, Y) - \Ent(Y)
+    \end{eqnarray}
+\end{document}

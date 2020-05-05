@@ -23,12 +23,51 @@
 \usepackage{import}
 \usepackage{cleveref}
 \usepackage{bm}
+\usepackage{moresize}
 
 \newcommand{\Z}[0]{\mathbb{Z}}
 \newcommand{\ZZ}{\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}}
 \newcommand{\gq}[1]{\grqq #1\glqq}
 \newcommand{\Ent}{\text{H}}
+\newcommand{\incfig}[2][\columnwidth]{%
+    \def\svgwidth{#1}
+    \import{./}{#2.eps_tex}
+}
 
+%---------------------Stolen from https://github.com/aul12/Kryptologie/blob/master/Uebung01/main.tex
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\newcommand\pythonstyle{\lstset{
+    language=Python,
+    basicstyle=\scriptsize,
+    otherkeywords={self},             % Add keywords here
+    keywordstyle=\color{deepblue},
+    emph={MyClass,__init__},          % Custom highlighting
+    emphstyle=\color{deepred},    % Custom highlighting style
+    stringstyle=\color{deepgreen},
+    frame=tb,                         % Any extra options here
+    showstringspaces=false,            % 
+}}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+%--------------------------------------
 
 \title{Kryptologie Blatt 2}
 \author{Tim Luchterhand}
@@ -57,9 +96,22 @@
                 \ZZ \ \Ent(X) &\leq& \Ent(X, Y) \\
                 \Ent(Y | X) &\stackrel{1.}{=}& \Ent(Y, X) - \Ent(X) \\
                 &=& \Ent(X, Y) - H(X) \\
-                &\Leftrightarrow& \Ent(x) = \Ent(X, Y) - \Ent(Y | X) \\
+                &\Leftrightarrow& \Ent(X) = \Ent(X, Y) - \Ent(Y | X) \\
                 &\stackrel{\Ent > 0}{\leq}& \Ent(X, Y)
             \end{eqnarray*}
     \end{enumerate}
 
+    \section{Schieberegister}
+    \begin{enumerate}[label=\alph*)]
+        \item  $ $
+        \begin{figure}[H]
+            \centering
+            \incfig[\textwidth]{Schieberegister}
+            \caption{Schaltplan des Schieberegisters}
+        \end{figure}
+        \item Die maximale Periodenlänge eines Schieberegisters mit vier Speichereinheiten beträgt $2^4 - 1 = 15$.
+        \item Für die Seeds 0000 bzw. 1111 beträgt die Periodenlänge 1. Für alle anderen Werte beträgt sie 7. Diese
+              Werte wurden durch Ausprobieren ermittelt. Der dafür verwendete Python-Code lautet:
+                \pythonexternal{testReg.py}
+    \end{enumerate}
 \end{document}

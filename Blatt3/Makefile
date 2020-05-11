@@ -4,11 +4,11 @@ ZIP=zip
 all:
 	$(LATEXMK) -pdf  main.tex
 
-Blatt1.zip:
+Blatt3.zip:
 	$(ZIP) $@ main.pdf *.py
 
 
-release: Blatt2.zip
+release: Blatt3.zip
 
 
 clean:

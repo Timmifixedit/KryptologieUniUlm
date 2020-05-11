@@ -30,6 +30,9 @@
 \newcommand{\gq}[1]{\grqq #1\glqq}
 \newcommand{\Ent}{\text{H}}
 \newcommand{\MI}{\text{I}}
+\newcommand{\ggt}{\text{ggT}}
+\newcommand{\rem}{\ \text{Rest} \ }
+\newcommand{\congTo}[2]{\equiv #1\mod #2}
 \newcommand{\incfig}[2][\columnwidth]{%
     \def\svgwidth{#1}
     \import{./}{#2.eps_tex}
@@ -98,5 +101,33 @@
         \begin{equation*}
             \MI(X, Y) = \Ent(Y) - \Ent(Y|X) \approx 1.5 - 1.19 = 0.31
         \end{equation*}
+    \end{enumerate}
+    \section{Pohlig-Hellman}
+    \begin{enumerate}[label=\alph*)]
+        \item 
+        \begin{align*}
+            22 =& ~2 \cdot 9 \rem 4 \\
+            9 =& ~2 \cdot 4 \rem 1 \\
+            4 =& ~4 \cdot 1 \rem 0 \\
+            \Rightarrow \ggt(9, n-1) =& ~\ggt(9, 22) = 1
+        \end{align*}
+        \item Nutze die vorletzte Zeile von a):
+        \begin{align*}
+            &9 = 2 \cdot 4 + 1 \Leftrightarrow 1 = 9 - 2 \cdot 4 \\
+            \Leftrightarrow& ~1 = 9 - 2 \cdot (22 - 2 \cdot 9) \\
+            \Leftrightarrow& ~1 = 5 \cdot 9 - 2 \cdot 22 \\
+            \Rightarrow& ~x = -2, ~y = 5 \\
+            \Rightarrow& ~d = y = 5 \wedge d \cdot e = 5 \cdot 9 \congTo{1}{22}
+        \end{align*}
+        \item 
+        \begin{align*}
+            c = m^e \mod n ~\hat{=}~ 16^9 \mod 23 = 8 \\
+            m = c^d \mod n ~\hat{=}~ 8^5 \mod 23 = 16
+        \end{align*}
+        \item Man erhält folgenden Chiffretext: \newline
+        1, 6, 18, 13, 11, 16, 15, 9, 2, 20, 19, 4, 3, 21, 14, 8, 7, 12, 10, 5, 17, 22
+        \item Wir der Chiffretext $c$ nach dem Schema $c=\vec{m}^e \mod 23$ berechnet mit 
+        $\vec{m} = (1, \dots, 22)$ und $e \in \Z_{22}^*$, dann existieren $\varphi(22) = |\Z_{22}^*| = 10$
+        verschiedene Permutationen.
     \end{enumerate}
 \end{document}

@@ -1,0 +1,102 @@
+\documentclass[DIN, pagenumber=false, fontsize=11pt, parskip=half]{scrartcl}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc} 
+\usepackage{commath}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{tikz-timing}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{xstring}
+\usepackage{circuitikz}
+\usepackage{listings}
+\usepackage[final]{pdfpages}
+\usepackage{subcaption}
+\usepackage{import}
+\usepackage{cleveref}
+\usepackage{bm}
+\usepackage{moresize}
+
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\ZZ}{\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}}
+\newcommand{\gq}[1]{\grqq #1\glqq}
+\newcommand{\Ent}{\text{H}}
+\newcommand{\MI}{\text{I}}
+\newcommand{\incfig}[2][\columnwidth]{%
+    \def\svgwidth{#1}
+    \import{./}{#2.eps_tex}
+}
+
+%---------------------Stolen from https://github.com/aul12/Kryptologie/blob/master/Uebung01/main.tex
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\newcommand\pythonstyle{\lstset{
+    language=Python,
+    basicstyle=\scriptsize,
+    otherkeywords={self},             % Add keywords here
+    keywordstyle=\color{deepblue},
+    emph={MyClass,__init__},          % Custom highlighting
+    emphstyle=\color{deepred},    % Custom highlighting style
+    stringstyle=\color{deepgreen},
+    frame=tb,                         % Any extra options here
+    showstringspaces=false,            % 
+}}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+%--------------------------------------
+
+\title{Kryptologie Blatt 3}
+\author{Tim Luchterhand}
+
+\begin{document}
+    \maketitle
+    \setcounter{section}{2}
+    \section{Entropie und Transinformation}
+    \begin{enumerate}[label=\alph*)]
+        \item 
+        \begin{align*}
+            \Ent(X, Y) ~\stackrel{\text{Def}}{=}& -\sum_{x, y}{p(x, y) \log_2\left(p(x, y)\right)} \\
+            \hat{=}& ~-4 \cdot \frac{1}{4} \log_2\left(\frac{1}{4}\right) = 2 \\
+            \Ent(X) \stackrel{\text{Def}}{=}& -\sum_x{p(x) \log_2\left(p(x)\right)} \ \text{mit} \ p(x_1) = \frac{3}{4} \ \text{und}
+            \ p(x_2) = \frac{1}{4} \\
+            \hat{=}& -\frac{3}{4} \log_2\left(\frac{3}{4}\right) - \frac{1}{4} \cdot (-2) \approx 0.81 \\
+            \Ent(Y) \stackrel{\text{Def}}{=}& -\sum_y{p(y) \log_2\left(p(y)\right)} \ \text{mit} \ p(y_1) = \frac{1}{2} \ \text{und}
+            \ p(x_2) = p(y_3) = \frac{1}{4} \\
+            \hat{=}& - \frac{1}{2} \cdot (-1) - 2 \cdot \frac{1}{4} \cdot (-2) = 1 \ \frac{1}{2}
+        \end{align*}
+        \item 
+        \begin{align*}
+            \Ent(X|Y) \stackrel{\text{Blatt 2}}{=}& \Ent(X, Y) - \Ent(Y) \hat{=} \ 2 - 1 \ \frac{1}{2} = \frac{1}{2} \\
+            \Ent(Y|X) \stackrel{\text{Blatt 2}}{=}& \Ent(X, Y) - \Ent(X) \approx 2 - 0.81 = 1.19\\
+        \end{align*}
+        \item 
+        \begin{equation*}
+            \MI(X, Y) = \Ent(Y) - \Ent(Y|X) \approx 1.5 - 1.19 = 0.31
+        \end{equation*}
+    \end{enumerate}
+\end{document}

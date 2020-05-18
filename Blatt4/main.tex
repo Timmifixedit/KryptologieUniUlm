@@ -1,0 +1,227 @@
+\documentclass[DIN, pagenumber=false, fontsize=11pt, parskip=half]{scrartcl}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc} 
+\usepackage{commath}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{tikz-timing}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{xstring}
+\usepackage{circuitikz}
+\usepackage{listings}
+\usepackage[final]{pdfpages}
+\usepackage{subcaption}
+\usepackage{import}
+\usepackage{cleveref}
+\usepackage{bm}
+\usepackage{moresize}
+
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\ZZ}{\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}}
+\newcommand{\gq}[1]{\grqq #1\glqq}
+\newcommand{\Ent}{\text{H}}
+\newcommand{\MI}{\text{I}}
+\newcommand{\ggt}{\text{ggT}}
+\newcommand{\rem}{\ \text{Rest} \ }
+\newcommand{\congTo}[2]{\equiv #1\mod #2}
+\newcommand{\incfig}[2][\columnwidth]{%
+    \def\svgwidth{#1}
+    \import{./}{#2.eps_tex}
+}
+
+%---------------------Stolen from https://github.com/aul12/Kryptologie/blob/master/Uebung01/main.tex
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\newcommand\pythonstyle{\lstset{
+    language=Python,
+    basicstyle=\scriptsize,
+    otherkeywords={self},             % Add keywords here
+    keywordstyle=\color{deepblue},
+    emph={MyClass,__init__},          % Custom highlighting
+    emphstyle=\color{deepred},    % Custom highlighting style
+    stringstyle=\color{deepgreen},
+    frame=tb,                         % Any extra options here
+    showstringspaces=false,            % 
+}}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+%--------------------------------------
+
+\title{Kryptologie Blatt 4}
+\author{Tim Luchterhand}
+
+\begin{document}
+    \maketitle
+    \setcounter{section}{1}
+    \section{Gruppenaxiome}
+    \paragraph{Neutrales Element}
+    Wie aus der Tabelle zu entnehmen ist, ist $\alpha$ das neutrale Element von $G$, denn $\forall g \in G : g \circ \alpha = g$
+    \paragraph{Inverses Element}
+    $\forall g in G \exists g' \in G : g \circ g' = \alpha$. Wie aus der Tabelle zu entnehmen, gilt $g' = g \ \forall g \in G$. 
+    \paragraph{Kommutativität}
+    Die Tabelle ist symmetrisch zur Hauptachse. Daraus folgt die Kommutativität.
+    \paragraph{Assoziativität}
+    Beweis per Brute-Force:
+    Um Assoziativität nachzuweisen muss lediglich getestet werden, ob $a \circ (b \circ c) = (a \circ b) \circ c \ \forall a, b, c \in G$ gilt.
+    Dies wurde durch folgendes Python-Skript automatisiert. Dabei wurden die Symbole $\alpha, \beta, \dots$ jeweils mit 0, 1, \dots ersetzt, um
+    die Abbildungsvorschrift für $\circ$ als Matrix zu realisieren.
+    \pythonexternal{bruteforce.py}
+
+    Ausgabe des Skripts:
+    \begin{lstlisting}
+        a: 0, b: 0, c: 0
+        True
+        a: 0, b: 0, c: 1
+        True
+        a: 0, b: 0, c: 2
+        True
+        a: 0, b: 0, c: 3
+        True
+        a: 0, b: 1, c: 0
+        True
+        a: 0, b: 1, c: 1
+        True
+        a: 0, b: 1, c: 2
+        True
+        a: 0, b: 1, c: 3
+        True
+        a: 0, b: 2, c: 0
+        True
+        a: 0, b: 2, c: 1
+        True
+        a: 0, b: 2, c: 2
+        True
+        a: 0, b: 2, c: 3
+        True
+        a: 0, b: 3, c: 0
+        True
+        a: 0, b: 3, c: 1
+        True
+        a: 0, b: 3, c: 2
+        True
+        a: 0, b: 3, c: 3
+        True
+        a: 1, b: 0, c: 0
+        True
+        a: 1, b: 0, c: 1
+        True
+        a: 1, b: 0, c: 2
+        True
+        a: 1, b: 0, c: 3
+        True
+        a: 1, b: 1, c: 0
+        True
+        a: 1, b: 1, c: 1
+        True
+        a: 1, b: 1, c: 2
+        True
+        a: 1, b: 1, c: 3
+        True
+        a: 1, b: 2, c: 0
+        True
+        a: 1, b: 2, c: 1
+        True
+        a: 1, b: 2, c: 2
+        True
+        a: 1, b: 2, c: 3
+        True
+        a: 1, b: 3, c: 0
+        True
+        a: 1, b: 3, c: 1
+        True
+        a: 1, b: 3, c: 2
+        True
+        a: 1, b: 3, c: 3
+        True
+        a: 2, b: 0, c: 0
+        True
+        a: 2, b: 0, c: 1
+        True
+        a: 2, b: 0, c: 2
+        True
+        a: 2, b: 0, c: 3
+        True
+        a: 2, b: 1, c: 0
+        True
+        a: 2, b: 1, c: 1
+        True
+        a: 2, b: 1, c: 2
+        True
+        a: 2, b: 1, c: 3
+        True
+        a: 2, b: 2, c: 0
+        True
+        a: 2, b: 2, c: 1
+        True
+        a: 2, b: 2, c: 2
+        True
+        a: 2, b: 2, c: 3
+        True
+        a: 2, b: 3, c: 0
+        True
+        a: 2, b: 3, c: 1
+        True
+        a: 2, b: 3, c: 2
+        True
+        a: 2, b: 3, c: 3
+        True
+        a: 3, b: 0, c: 0
+        True
+        a: 3, b: 0, c: 1
+        True
+        a: 3, b: 0, c: 2
+        True
+        a: 3, b: 0, c: 3
+        True
+        a: 3, b: 1, c: 0
+        True
+        a: 3, b: 1, c: 1
+        True
+        a: 3, b: 1, c: 2
+        True
+        a: 3, b: 1, c: 3
+        True
+        a: 3, b: 2, c: 0
+        True
+        a: 3, b: 2, c: 1
+        True
+        a: 3, b: 2, c: 2
+        True
+        a: 3, b: 2, c: 3
+        True
+        a: 3, b: 3, c: 0
+        True
+        a: 3, b: 3, c: 1
+        True
+        a: 3, b: 3, c: 2
+        True
+        a: 3, b: 3, c: 3
+        True
+    \end{lstlisting}
+\end{document}

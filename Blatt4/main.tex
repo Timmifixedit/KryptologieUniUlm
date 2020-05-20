@@ -21,7 +21,7 @@
 \usepackage[final]{pdfpages}
 \usepackage{subcaption}
 \usepackage{import}
-\usepackage{cleveref}
+\usepackage[german]{cleveref}
 \usepackage{bm}
 \usepackage{moresize}
 
@@ -33,6 +33,7 @@
 \newcommand{\Ent}{\text{H}}
 \newcommand{\MI}{\text{I}}
 \newcommand{\ggt}{\text{ggT}}
+\newcommand{\kgv}{\text{kgV}}
 \newcommand{\rem}{\ \text{Rest} \ }
 \newcommand{\congTo}[2]{\equiv #1\mod #2}
 \newcommand{\incfig}[2][\columnwidth]{%
@@ -257,8 +258,82 @@
             & \stackrel{n=r \cdot s}{=} r \cdot \prod_{i=1}^k{\left(1 - \frac{1}{r_i}\right)} \cdot s \cdot \prod_{i=1}^l{\left(1 - \frac{1}{s_i}\right)} \\
             &\stackrel{\ref{eq:phi}}{=} \varphi(r) \cdot \varphi(s)
         \end{align*}
-        q.e.d
+        \begin{flushright}
+            q.e.d.
+        \end{flushright}
 
-        \item und jetzt weiter
+        \newpage
+
+        \item $\ZZ \ \varphi(n) \varphi(n) = \varphi\left(\ggt(n, m)\right) \varphi\left(\kgv(m, n)\right)$ für $n, m \in \N$. \newline
+        Fall 1: $\ggt(n, m) = 1$ \newline
+        Dann ist $\kgv(n, m) = m \cdot n$ und es folgt:
+        \begin{equation*}
+            \varphi(n) \varphi(m) \stackrel{\text{3 a)}}{=} \varphi(n \cdot m) = \varphi\left(\kgv(n, m)\right)
+        \end{equation*}
+        Fall 2: $\ggt(n, m) \neq 1$ \newline
+        Seien $(p_i)_{i=1}^k$ bzw. $(q_i)_{i=1}^l$ die unterschiedlichen Primfaktoren von $n$ bzw. $m$, also $p_i \neq p_j \ \wedge \ q_i \neq q_j$ für 
+        $i \neq j$. Zu jedem Primfaktor $p_i$ bzw. $q_i$ gehöre die Potenz $e_i$ bzw. $f_i$, sodass gilt:
+        \begin{equation}
+            n = \prod_{i=1}^k{p_i^{e_i}} \ \text{bzw.} \ m = \prod_{i=1}^l{q_i^{f_i}} \label{eq:pfz}
+        \end{equation}
+        Beide Zahlen nach Voraussetzung habe einen oder mehrere gemeinsame Teiler. oBdA gelte Folgendes für die Primfaktoren $p_i$ und $q_i$:
+        \begin{align}
+            (p_i)_{i=1}^k &= (p_1, \dots, p_k) \label{eq:nPrime}\\
+            (q_i)_{i=1}^l &= (p_1, \dots, p_j, r_1, \dots, r_h) \ \text{mit} \ j \leq k \ \text{und} \ l = j+h \label{eq:mPrime}
+        \end{align}
+        D.h. $n, m$ besitzen die gemeinsamen Primfaktoren $p_1, \dots, p_j$. $n$ besitzt darüber hinaus die Primfaktoren $ p_{j+1}, \dots, p_k$ und $m$
+        dir Primfaktoren $r_1, \dots, r_h$.
+        \paragraph{Einschub: Überlegungen zum ggT und kgV} $ $ \newline
+        Bezeichne $P(z)$ im Folgenden die paarweise verschiedenen Primfaktoren von $z$ für $z \in \N$. Der $\ggt(n,m) =: \ggt$ ist die größtmögliche Zahl, 
+        die sowohl $n$ als auch $m$ teilt. Damit gilt $\ggt \ | \ n$ muss also gelten, dass $P(\ggt) \subseteq P(n)$. Ebenso muss gelten $P(\ggt) \subseteq P(m)$
+        damit $\ggt \ | \ m$ sichergestellt ist. Damit folgt im konkreten Fall:
+        \begin{equation}
+            P(\ggt) = P(n) \cup P(m) \stackrel{\ref{eq:mPrime}}{=} \{p_1, \dots, p_j\} \label{eq:PggT}
+        \end{equation}
+        Da der ggT die größtmögliche Zahl ist, die $n$ und $m$ teilt, lässt sie sich über ihre Primfaktoren $P(\ggt)$ folgendermaßen darstellen:
+        \begin{equation}
+            \ggt = \prod_{i=1}^j{p_i^{g_i}} \ \text{mit} \ g_i = \min\{e_i, f_i\} \ \forall i \leq j \label{eq:ggt}
+        \end{equation}
+        Besitzt man also die vollständige Primfaktorzerlegungen von $n$ und $m$, so ist der ggT das Produkt aus allen gemeinsamen Primfaktoren von $n$ und $m$
+        wobei die einzelnen Primfaktoren $p_i$ jeweils die kleinere der zugehörigen Potenzen $e_i$ und $f_i$ besitzen muss. Anders ausgedrückt sind die Faktoren
+        $p_i^{g_i}$ alle größten (Primpotenz-) Teiler, die sowohl $n$ als auch $m$ teilen. \newpage
+
+        Für das $\kgv(n, m) =: \kgv$ gilt $n \ | \ \kgv$ und $m \ | \ \kgv$. Daraus folgt, dass $P(\kgv) \supseteq P(n)$ und $P(\kgv) \supseteq m$ gelten muss.
+        Für den konkreten Fall bedeutet dies:
+        \begin{equation}
+            P(\kgv) = P(n) \cup P(m) \stackrel{\ref{eq:nPrime}, \ref{eq:mPrime}}{=} \{p_1, \dots, p_k, r_1, \dots, r_h\} \label{eq:PkgV}
+        \end{equation}
+        Analog zum ggT lässt sich das kgV ebenfalls aus den Primfaktoren der beiden Zahlen $n$ und $m$ berechnen. Es ist das Produkt aus allen Primfaktoren
+        von $n$ und $m$, wobei für die Primfaktoren $\{p_1, \dots, p_j\}$ anstatt $g_i = \min{e_i, f_i}$ als Potenz das Maximum von $e_i$ und $f_i$ gewählt wird:
+        \begin{equation}
+            \kgv = \prod_{i=1}^j{p_i^{h_i}} \prod_{i=j+1}^k{p_i^{e_i}} \prod_{i=1}^h{r_i^{f_i}} \ 
+            \text{mit} \ h_i = \max\{e_i, f_i\} \ \forall i \leq j \label{eq:kgv}
+        \end{equation}
+        Aus \cref{eq:ggt} und \ref{eq:kgv} lässt sich durch Umsortieren folgern
+        \begin{align}
+            \ggt\cdot \kgv &= \prod_{i=1}^j{p_i^{g_i}} \prod_{i=1}^j{p_i^{h_i}} \prod_{i=j+1}^k{p_i^{e_i}} \prod_{i=1}^h{r_i^{f_i}} \\
+            &= \prod_{i=1}^j{p_i^{e_i}} \prod_{i=j+1}^k{p_i^{e_i}} \prod_{i=1}^j{p_i^{f_i}} \prod_{i=1}^h{r_i^{f_i}} \\
+            &\stackrel{\ref{eq:mPrime}}{=} \prod_{i=1}^k{p_i^{e_i}} \prod_{i=1}^l{q_i^{f_i}} = n \cdot m \label{eq:ggtTimeskgv}
+        \end{align}
+
+        \paragraph{Zurück zum Beweis}
+        \begin{align*}
+            \varphi(n) \varphi(m) &\stackrel{\ref{eq:phi}}{=} n \cdot \prod_{i=1}^k{\left(1 - \frac{1}{p_i}\right)} 
+            \cdot m \cdot \prod_{i=1}^l{\left(1 - \frac{1}{q_i}\right)} \\
+            &\stackrel{\ref{eq:mPrime}}{=} n \cdot \prod_{i=1}^k{\left(1 - \frac{1}{p_i}\right)} 
+            \cdot m \cdot \prod_{i=1}^j{\left(1 - \frac{1}{p_i}\right)} \prod_{i=1}^h{\left(1 - \frac{1}{r_i}\right)} \\
+            &= n \cdot \prod_{i=1}^{j}{\left(1 - \frac{1}{p_i}\right)} \prod_{i=j+1}^k{\left(1 - \frac{1}{p_i}\right)}
+            \cdot m \cdot \prod_{i=1}^j{\left(1 - \frac{1}{p_i}\right)} \prod_{i=1}^h{\left(1 - \frac{1}{r_i}\right)} \\
+            &= n \cdot \prod_{i=1}^{j}{\left(1 - \frac{1}{p_i}\right)} \cdot m \cdot \prod_{i=1}^j{\left(1 - \frac{1}{p_i}\right)} 
+            \prod_{i=1}^h{\left(1 - \frac{1}{r_i}\right)} \prod_{i=j+1}^k{\left(1 - \frac{1}{p_i}\right)}\\
+            &\stackrel{\ref{eq:PggT}, \ref{eq:PkgV}}{=} n \cdot \prod_{p \in P(\ggt)}{\left(1 - \frac{1}{p}\right)}
+            \cdot m \cdot \prod_{p \in P(\kgv)}{\left(1 - \frac{1}{p}\right)} \\
+            &\stackrel{\ref{eq:ggtTimeskgv}}{=} \ggt \cdot \prod_{p \in P(\ggt)}{\left(1 - \frac{1}{p}\right)} 
+            \cdot \kgv \prod_{p \in P(\kgv)}{\left(1 - \frac{1}{p}\right)} \\
+            &\stackrel{\ref{eq:phi}}{=} \varphi(\ggt) \varphi(\kgv) \\
+        \end{align*}
+        \begin{flushright}
+            q.e.d.
+        \end{flushright}
     \end{enumerate}
 \end{document}

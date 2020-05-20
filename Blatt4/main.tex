@@ -85,7 +85,7 @@
     \paragraph{Neutrales Element}
     Wie aus der Tabelle zu entnehmen ist, ist $\alpha$ das neutrale Element von $G$, denn $\forall g \in G : g \circ \alpha = g$
     \paragraph{Inverses Element}
-    $\forall g in G \exists g' \in G : g \circ g' = \alpha$. Wie aus der Tabelle zu entnehmen, gilt $g' = g \ \forall g \in G$. 
+    $\forall g \in G \ \exists g' \in G : g \circ g' = \alpha$. Wie aus der Tabelle zu entnehmen, gilt $g' = g \ \forall g \in G$. 
     \paragraph{Kommutativität}
     Die Tabelle ist symmetrisch zur Hauptachse. Daraus folgt die Kommutativität.
     \paragraph{Assoziativität}
@@ -252,7 +252,7 @@
         Dann folgt für $n = r \cdot s$
         \begin{align*}
             \varphi(n) &= n \cdot \prod_{i = 1}^{k+l}{\left(1 - \frac{1}{p_i}\right)} =
-            n \cdot \prod_{i=1}^k{\left(1 - \frac{1}{p_i}\right)} \prod_{i=1}^l{\left(1 - \frac{1}{p_i}\right)} \\
+            n \cdot \prod_{i=1}^k{\left(1 - \frac{1}{p_i}\right)} \prod_{i=k+1}^l{\left(1 - \frac{1}{p_i}\right)} \\
             &\stackrel{\ref{eq:p}}{=} n \cdot \prod_{i=1}^k{\left(1 - \frac{1}{r_i}\right)} \prod_{i=1}^l{\left(1 - \frac{1}{s_i}\right)} \\
             & \stackrel{n=r \cdot s}{=} r \cdot \prod_{i=1}^k{\left(1 - \frac{1}{r_i}\right)} \cdot s \cdot \prod_{i=1}^l{\left(1 - \frac{1}{s_i}\right)} \\
             &\stackrel{\ref{eq:phi}}{=} \varphi(r) \cdot \varphi(s)

@@ -290,8 +290,8 @@
 
         \paragraph{Einschub: Überlegungen zum ggT und kgV} \label{par:Einschub} $ $ \newline
         Bezeichne $P(z)$ im Folgenden die paarweise verschiedenen Primfaktoren von $z$ für $z \in \N$. Der $\ggt(n,m) =: \ggt$ ist die größtmögliche Zahl, 
-        die sowohl $n$ als auch $m$ teilt. Damit gilt $\ggt \ | \ n$ muss also gelten, dass $P(\ggt) \subseteq P(n)$. Ebenso muss gelten $P(\ggt) \subseteq P(m)$
-        damit $\ggt \ | \ m$ sichergestellt ist. Damit folgt im konkreten Fall:
+        die sowohl $n$ als auch $m$ teilt. Aus $\ggt \ | \ n$ folgt, dass $P(\ggt) \subseteq P(n)$. Ebenso muss gelten $P(\ggt) \subseteq P(m)$ damit 
+        $\ggt \ | \ m$ sichergestellt ist. Damit folgt im konkreten Fall:
         \begin{equation}
             P(\ggt) = P(n) \cup P(m) \stackrel{\ref{eq:mPrime}}{=} \{p_1, \dots, p_j\} \label{eq:PggT}
         \end{equation}
@@ -309,7 +309,7 @@
             P(\kgv) = P(n) \cup P(m) \stackrel{\ref{eq:nPrime}, \ref{eq:mPrime}}{=} \{p_1, \dots, p_k, r_1, \dots, r_h\} \label{eq:PkgV}
         \end{equation}
         Analog zum ggT lässt sich das kgV ebenfalls aus den Primfaktoren der beiden Zahlen $n$ und $m$ berechnen. Es ist das Produkt aus allen Primfaktoren
-        von $n$ und $m$, wobei für die Primfaktoren $\{p_1, \dots, p_j\}$ anstatt $g_i = \min{e_i, f_i}$ als Potenz das Maximum von $e_i$ und $f_i$ gewählt wird:
+        von $n$ und $m$, wobei für die Primfaktoren $p_i, i \leq k$ anstatt $g_i = \min\{e_i, f_i\}$ als Potenz das Maximum von $e_i$ und $f_i$ gewählt wird:
         \begin{equation}
             \kgv = \prod_{i=1}^j{p_i^{h_i}} \prod_{i=j+1}^k{p_i^{e_i}} \prod_{i=1}^h{r_i^{f_i}} \ 
             \text{mit} \ h_i = \max\{e_i, f_i\} \ \forall i \leq j \label{eq:kgv}

@@ -241,7 +241,7 @@
         \end{equation*}
         mit 
         \begin{align}
-            (p_i)_{i=1}^{k+l} &= (p_1, \dots, p_k, s_1, \dots, s_l) \label{eq:p}\\
+            (p_i)_{i=1}^{k+l} &= (r_1, \dots, r_k, s_1, \dots, s_l) \label{eq:p}\\
             \text{und} \ (e_{n,i})_{i=1}^{k+l} &= (e_{r, 1}, \dots, e_{r, k}, e_{s, 1}, \dots, e_{s, l})
         \end{align}
         Durch die Teilerfremdheit von $r$ und $s$ gilt hierbei $p_i \neq p_j$ für $i \neq j$.
@@ -267,9 +267,13 @@
         \item $\ZZ \ \varphi(n) \varphi(n) = \varphi\left(\ggt(n, m)\right) \varphi\left(\kgv(m, n)\right)$ für $n, m \in \N$. \newline
         Fall 1: $\ggt(n, m) = 1$ \newline
         Dann ist $\kgv(n, m) = m \cdot n$ und es folgt:
-        \begin{equation*}
-            \varphi(n) \varphi(m) \stackrel{\text{3 a)}}{=} \varphi(n \cdot m) = \varphi\left(\kgv(n, m)\right)
-        \end{equation*}
+        \begin{align*}
+            \varphi(n) \varphi(m) &\stackrel{\text{3 a)}}{=} \varphi(n \cdot m) = 1 \cdot \varphi\left(\kgv(n, m)\right) \\
+            &= \varphi(1) \varphi\left(\kgv(n, m)\right) = \varphi(\ggt(n, m)) \varphi\left(\kgv(n, m)\right)
+        \end{align*}
+        Anmerkung: $\varphi(1)$ ist per Definition 1.
+
+
         Fall 2: $\ggt(n, m) \neq 1$ \newline
         Seien $(p_i)_{i=1}^k$ bzw. $(q_i)_{i=1}^l$ die unterschiedlichen Primfaktoren von $n$ bzw. $m$, also $p_i \neq p_j \ \wedge \ q_i \neq q_j$ für 
         $i \neq j$. Zu jedem Primfaktor $p_i$ bzw. $q_i$ gehöre die Potenz $e_i$ bzw. $f_i$, sodass gilt:
@@ -283,7 +287,8 @@
         \end{align}
         D.h. $n, m$ besitzen die gemeinsamen Primfaktoren $p_1, \dots, p_j$. $n$ besitzt darüber hinaus die Primfaktoren $ p_{j+1}, \dots, p_k$ und $m$
         dir Primfaktoren $r_1, \dots, r_h$.
-        \paragraph{Einschub: Überlegungen zum ggT und kgV} $ $ \newline
+
+        \paragraph{Einschub: Überlegungen zum ggT und kgV} \label{par:Einschub} $ $ \newline
         Bezeichne $P(z)$ im Folgenden die paarweise verschiedenen Primfaktoren von $z$ für $z \in \N$. Der $\ggt(n,m) =: \ggt$ ist die größtmögliche Zahl, 
         die sowohl $n$ als auch $m$ teilt. Damit gilt $\ggt \ | \ n$ muss also gelten, dass $P(\ggt) \subseteq P(n)$. Ebenso muss gelten $P(\ggt) \subseteq P(m)$
         damit $\ggt \ | \ m$ sichergestellt ist. Damit folgt im konkreten Fall:

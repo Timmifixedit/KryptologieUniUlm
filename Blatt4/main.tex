@@ -26,6 +26,8 @@
 \usepackage{moresize}
 
 \newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\N}[0]{\mathbb{N}}
+\newcommand{\R}[0]{\mathbb{R}}
 \newcommand{\ZZ}{\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}}
 \newcommand{\gq}[1]{\grqq #1\glqq}
 \newcommand{\Ent}{\text{H}}
@@ -224,4 +226,39 @@
         a: 3, b: 3, c: 3
         True
     \end{lstlisting}
+
+    \section{$\varphi$-Funktion}
+    \begin{enumerate}[label=\alph*)]
+        \item $\ZZ \ \varphi(n) = \varphi(r) \varphi(s)$ für $n = r \cdot s, \ r, s \in \Z$ teilerfremd.
+        Seien
+        \begin{equation*}
+            r = \prod_{i=1}^k{r_i^{e_{r,i}}} \ , \ s = \prod_{i=1}^l{s_i^{e_{s,i}}}
+        \end{equation*}
+        die Primfaktorzerlegungen von $r$ und $s$. Dann gilt:
+        \begin{equation*}
+            n = r \cdot s = \prod_{i=1}^k{r_i^{e_{r,i}}} \cdot \prod_{i=1}^l{s_i^{e_{s,i}}} = \prod_{i=1}^{k+l}{p_i^{e_{n, i}}}
+        \end{equation*}
+        mit 
+        \begin{align}
+            (p_i)_{i=1}^{k+l} &= (p_1, \dots, p_k, s_1, \dots, s_l) \label{eq:p}\\
+            \text{und} \ (e_{n,i})_{i=1}^{k+l} &= (e_{r, 1}, \dots, e_{r, k}, e_{s, 1}, \dots, e_{s, l})
+        \end{align}
+        Durch die Teilerfremdheit von $r$ und $s$ gilt hierbei $p_i \neq p_j$ für $i \neq j$.
+        Aus der Vorlesung ist bekannt, dass für $n \in \N$ mit den Primfaktoren $p_1, \dots, p_m$ gilt:
+        \begin{equation}
+            \varphi(n) = n \cdot \prod_{i=1}^m{\left(1 - \frac{1}{p_i}\right)}
+            \label{eq:phi}
+        \end{equation}
+        Dann folgt für $n = r \cdot s$
+        \begin{align*}
+            \varphi(n) &= n \cdot \prod_{i = 1}^{k+l}{\left(1 - \frac{1}{p_i}\right)} =
+            n \cdot \prod_{i=1}^k{\left(1 - \frac{1}{p_i}\right)} \prod_{i=1}^l{\left(1 - \frac{1}{p_i}\right)} \\
+            &\stackrel{\ref{eq:p}}{=} n \cdot \prod_{i=1}^k{\left(1 - \frac{1}{r_i}\right)} \prod_{i=1}^l{\left(1 - \frac{1}{s_i}\right)} \\
+            & \stackrel{n=r \cdot s}{=} r \cdot \prod_{i=1}^k{\left(1 - \frac{1}{r_i}\right)} \cdot s \cdot \prod_{i=1}^l{\left(1 - \frac{1}{s_i}\right)} \\
+            &\stackrel{\ref{eq:phi}}{=} \varphi(r) \cdot \varphi(s)
+        \end{align*}
+        q.e.d
+
+        \item und jetzt weiter
+    \end{enumerate}
 \end{document}

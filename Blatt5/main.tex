@@ -1,0 +1,100 @@
+\documentclass[DIN, pagenumber=false, fontsize=11pt, parskip=half]{scrartcl}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc} 
+\usepackage{commath}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{tikz-timing}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{xstring}
+\usepackage{circuitikz}
+\usepackage{listings}
+\usepackage[final]{pdfpages}
+\usepackage{subcaption}
+\usepackage{import}
+\usepackage[german]{cleveref}
+\usepackage{bm}
+\usepackage{moresize}
+
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\N}[0]{\mathbb{N}}
+\newcommand{\R}[0]{\mathbb{R}}
+\newcommand{\ZZ}{\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}}
+\newcommand{\gq}[1]{\grqq #1\glqq}
+\newcommand{\Ent}{\text{H}}
+\newcommand{\MI}{\text{I}}
+\newcommand{\ggt}{\text{ggT}}
+\newcommand{\kgv}{\text{kgV}}
+\newcommand{\rem}{\ \text{Rest} \ }
+\newcommand{\congTo}[2]{\equiv #1\mod #2}
+\newcommand{\incfig}[2][\columnwidth]{%
+    \def\svgwidth{#1}
+    \import{./}{#2.eps_tex}
+}
+
+%---------------------Stolen from https://github.com/aul12/Kryptologie/blob/master/Uebung01/main.tex
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\newcommand\pythonstyle{\lstset{
+    language=Python,
+    basicstyle=\scriptsize,
+    otherkeywords={self},             % Add keywords here
+    keywordstyle=\color{deepblue},
+    emph={MyClass,__init__},          % Custom highlighting
+    emphstyle=\color{deepred},    % Custom highlighting style
+    stringstyle=\color{deepgreen},
+    frame=tb,                         % Any extra options here
+    showstringspaces=false,            % 
+}}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+%--------------------------------------
+
+\title{Kryptologie Blatt 5}
+\author{Tim Luchterhand}
+
+\begin{document}
+    \maketitle
+    \section{Quadratwurzel}
+    Die Quadratwurzeln von $1 \mod 55$ lassen sich über den chinesischen Restsatz berechnen. Da gilt, dass $55 = 5 \cdot 11$ berechnet man jeweils die Quadratwurzeln
+    $\sqrt{1} \mod 5$ und $\sqrt{1} \mod 11$. Die Quadratwurzel von 1 bezüglich dieser beiden Module ist jeweils 1 und -1. die vier Quadratwurzeln von $1 \mod 55$
+    berechnen sich dann aus der Rücktransformation aller Permutationen von 1 und -1. Diese wurden durch folgendes Python-Skript berechnet:
+    \pythonexternal{transform.py}
+    Die Ausgabe des Skripts ist:
+    \begin{lstlisting}
+Square root of 1 mod 55 is 1
+1^2 = 1 mod 55
+Square root of 1 mod 55 is 34
+34^2 = 1 mod 55
+Square root of 1 mod 55 is 21
+21^2 = 1 mod 55
+Square root of 1 mod 55 is 54
+54^2 = 1 mod 55
+    \end{lstlisting}
+\end{document}

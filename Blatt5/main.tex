@@ -97,4 +97,26 @@ Square root of 1 mod 55 is 21
 Square root of 1 mod 55 is 54
 54^2 = 1 mod 55
     \end{lstlisting}
+
+\section{Oberhuber No-Key-Protokoll}
+Die Sicherheit des ursprünglichen No-Key-Protokolls von Shamir beruht auf der Tatsache, dass sich der diskrete Logarithmus nicht effizient berechnen lässt. Da bei dieser
+Variante keine modulare Exponentiation zum Einsatz kommt, ist das Protokoll angreifbar:
+\begin{enumerate}
+    \item Zunächst erhält der Angreifer $c = m \cdot a \mod n$. Ohne Kenntnis von $m$ oder $a$ lässt sich hier nicht viel machen. Jedoch lässt sich mithilfe des extggT
+          das Inverse $c'$ zu $c$ effizient berechnen.
+    \item Als nächstes wird $d = c \cdot b \mod n$ abgefangen. Hier kann nun mit dem Inversen von $c$ multipliziert werden:
+          \begin{equation*}
+              d \cdot c' \congTo{c \cdot b \cdot c'}{n} \stackrel{\Z^*_n \text{ist abelsche Gruppe}}{\equiv} c \cdot c' \cdot b \mod n \congTo{1 \cdot b}{n}
+          \end{equation*}
+          Nun besitzt der Angreifer also die geheime Zahl $b$ und kann wiederum das Inverse $b'$ durch den extggT berechnen.
+    \item Sobald der Angreifer $e = d \cdot a' \congTo{m \cdot b}{n}$ erhält, kann er die Nachricht $m$ entschlüsseln, indem er mit $b'$ multipliziert:
+          \begin{equation*}
+              e \cdot b' \congTo{m \cdot b \cdot b'}{n} \congTo{m \cdot 1}{n}
+          \end{equation*}
+    \item Zusätzlich könnte der Angreifer auch das Inverse zu $m$ berechnen und dadurch and die geheime Zahl $a$ gelangen:
+          \begin{equation*}
+              c \cdot m' \congTo{m \cdot a \cdot m'}{n} \congTo{a \cdot 1}{n}
+          \end{equation*}
+          Dadurch kann er nun die Kommunikation in beide Richtungen entschlüsseln.
+\end{enumerate}
 \end{document}

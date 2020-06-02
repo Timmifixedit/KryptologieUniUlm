@@ -88,4 +88,27 @@
     \pythonexternal{primeTest.py}
     Die Ausgabe des Skripts ist
     \VerbatimInput{output.txt}
+
+    \section{Untergruppe}
+    Die Aussage gilt im Allgemeinen \textit{nicht}. \\
+    Beweis: \\
+    Sei $n \neq 2$ eine Primzahl (für den Fall 2 gelten die Voraussetzungen nicht), dann gilt: $n = 1 \cdot n$ und $\ggt(1, n) = 1$, wobei 1 und 
+    $n$ offensichtlich ungerade sind. Weiterhin gilt für $n$:
+    \begin{equation}
+        n = \prod_{i=1}^l{a_i} + 1
+        \label{eq:n}
+    \end{equation}
+    Hierbei sind $a_i, i = 1, \dots, l$ die (nicht notwendigerweise verschiedenen) Primfaktoren von $n - 1$. Um nun $n - 1$ als $k \cdot 2^u$
+    darzustellen mit $k \in \Z$ ungerade und $u \geq 1$ muss gelten, dass $u = 1$, denn:
+    \begin{equation}
+        n - 1 \stackrel{\ref{eq:n}}{=} \prod_{i=1}^l{a_i} = 2 \cdot \prod_{i=2}^l{a_i} = 2^1 \cdot k \ \text{mit} \ k = \prod_{i=2}^l{a_i}
+        \label{eq:k}
+    \end{equation}
+    $k$ ist also offensichtlich ungerade. Da $u$ nur den Wert 1 annehmen kann, gilt $i \in \{0, \dots, u - 1\} \Rightarrow i = 0$. 
+    Daraus folgt wiederum, dass $a^{k \cdot 2^i} \congTo{\pm 1}{n} \ \forall a \in \{1, \dots, n - 1\}$, denn:
+    \begin{align*}
+        a^{k \cdot 2^i} &= a^{k \cdot 2^0} = a^{k} \stackrel{\ref{eq:k}}{=} a^{\frac{n - 1}{2}} = \sqrt{a^{n - 1}} \\
+        &\stackrel{n \ \text{prim}}{=} \sqrt{a^{\varphi(n)}} \stackrel{\text{Fermat}}{\equiv} \sqrt{1} \mod n \stackrel{n \ \text{prim}}{\equiv} \pm 1 \mod n
+    \end{align*}
+    Insgesamt folgt also, dass $|B_n| = |\Z_n^*|$ weshalb $B_n$ keine \textit{echte} Untergruppe sein kann.
 \end{document}

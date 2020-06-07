@@ -4,11 +4,11 @@ ZIP=zip
 all: output.txt
 	$(LATEXMK) -pdf  main.tex
 
-Blatt6.zip: all
-	$(ZIP) $@ main.pdf *.py
+Blatt6: all
+	mv main.pdf Blatt6TimLuchterhand.pdf
 
 
-release: Blatt6.zip
+release: Blatt6
 
 output.txt:
 	python primeTest.py >> output.txt

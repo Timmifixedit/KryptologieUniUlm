@@ -22,7 +22,7 @@ def miller_rabin_prime_test(n, a=None, verbose=False):
         d = d * d % n
         if verbose:
             print("Calculate %d * %d mod %d = %d" % (last_d, last_d, n, d))
-            print("Is %d a square root of %d mod %d and not 1 or -1 (%d)?" % (last_d, d, n, n - 1))
+            print("Is %d a square root of 1 mod %d and not 1 or -1 (%d)?" % (last_d, n, n - 1))
 
         if d == 1 and last_d != 1 and last_d != n - 1:
             if verbose:

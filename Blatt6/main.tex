@@ -89,26 +89,41 @@
     Die Ausgabe des Skripts ist
     \VerbatimInput{output.txt}
 
+    \newpage
+
     \section{Untergruppe}
-    Die Aussage gilt im Allgemeinen \textit{nicht}. \\
-    Beweis: \\
-    Sei $n \neq 2$ eine Primzahl (für den Fall 2 gelten die Voraussetzungen nicht), dann gilt: $n = 1 \cdot n$ und $\ggt(1, n) = 1$, wobei 1 und 
-    $n$ offensichtlich ungerade sind. Weiterhin gilt für $n$:
-    \begin{equation}
-        n = \prod_{i=1}^l{a_i} + 1
-        \label{eq:n}
-    \end{equation}
-    Hierbei sind $a_i, i = 1, \dots, l$ die (nicht notwendigerweise verschiedenen) Primfaktoren von $n - 1$. Um nun $n - 1$ als $k \cdot 2^u$
-    darzustellen mit $k \in \Z$ ungerade und $u \geq 1$ muss gelten, dass $u = 1$, denn:
-    \begin{equation}
-        n - 1 \stackrel{\ref{eq:n}}{=} \prod_{i=1}^l{a_i} = 2 \cdot \prod_{i=2}^l{a_i} = 2^1 \cdot k \ \text{mit} \ k = \prod_{i=2}^l{a_i}
-        \label{eq:k}
-    \end{equation}
-    $k$ ist also offensichtlich ungerade. Da $u$ nur den Wert 1 annehmen kann, gilt $i \in \{0, \dots, u - 1\} \Rightarrow i = 0$. 
-    Daraus folgt wiederum, dass $a^{k \cdot 2^i} \congTo{\pm 1}{n} \ \forall a \in \{1, \dots, n - 1\}$, denn:
+    Im Folgenden seien $i, u$ und $k$ wie in der Aufgabenstellung definiert.
+    Um zu zeigen, dass $B_n$ eine echte Untergruppe von $\Z_n^*$ ist, muss folgendes gelten:
+    \begin{enumerate}
+        \item $B_n \subset \Z_n^*$
+        \item $a \cdot b \mod n \in B_n \ \forall a, b \in B_n$
+        \item $\forall a \in B_n \ \exists a' \in B_n : a \cdot a' \congTo{1}{n}$
+    \end{enumerate}
+    Zunächst soll 2. gezeigt werden: \\
+    Seien $a, b \in B_n$ und es gelte $a \cdot b \congTo{z}{n}$. Dann gilt:
     \begin{align*}
-        a^{k \cdot 2^i} &= a^{k \cdot 2^0} = a^{k} \stackrel{\ref{eq:k}}{=} a^{\frac{n - 1}{2}} = \sqrt{a^{n - 1}} \\
-        &\stackrel{n \ \text{prim}}{=} \sqrt{a^{\varphi(n)}} \stackrel{\text{Fermat}}{\equiv} \sqrt{1} \mod n \stackrel{n \ \text{prim}}{\equiv} \pm 1 \mod n
+        z^{k \cdot 2^i} &= (a \cdot b)^{k \cdot 2^i} = a^{k \cdot 2^i} \cdot b^{k \cdot 2^i} \\
+        &\congTo{(\pm 1) \cdot (\pm 1)}{n} = \pm 1 \\
+        &\Rightarrow z \in B_n
     \end{align*}
-    Insgesamt folgt also, dass $|B_n| = |\Z_n^*|$ weshalb $B_n$ keine \textit{echte} Untergruppe sein kann.
+    Als nächstes wird die Existenz des inversen Elements gezeigt. Sei $a \in B_n$ und es gelte $a \cdot a' \congTo{1}{n}$. Offensichtlich gilt $1 \in B_n$.
+    Daraus folgt:
+    \begin{align*}
+        1^{k \cdot 2^i} &= (a \cdot a')^{k \cdot 2^i} = a^{k \cdot 2^i} \cdot a'^{k \cdot 2^i} \\
+        &\congTo{(\pm 1) \cdot a'^{k \cdot 2^i}}{n} \stackrel{!}{\equiv} 1 \mod n \\
+        &\Rightarrow a'^{k \cdot 2^i} \stackrel{!}{\equiv} \mp 1 \mod n \Rightarrow a' \in B_n
+    \end{align*}
+    Für 1. muss gezeigt werden, dass $a \in B_n \Rightarrow a \in \Z_n^*$ Also muss gezeigt werden: $a^{k \cdot 2^i} \congTo{\pm 1}{n} \Rightarrow \ggt(a, n) = 1$.
+    Ohne näheres Wissen über $u, i$ und die Elemente in $B_n$ konnte ich das leider nicht zeigen. Ein Ansatz war, die Implikation in umgekehrte Richtung zu zeigen,
+    also $\ggt(a, n) = d > 1 \Rightarrow a^{k \cdot 2^i} \not\congTo{\pm 1}{n}$:
+    \begin{equation*}
+        a^{k \cdot 2^i} \not\congTo{\pm 1}{n} \Rightarrow a^{k \cdot 2^i} = l \cdot n \pm 1 \Leftrightarrow l = \frac{a ^{k \cdot 2^i} \pm 1}{n} \notin \Z
+    \end{equation*}
+    Man müsste also zeigen, dass $l$ keine ganze Zahl sein kann. Hierbei wird aber kein Wissen über $i$ und $u$ mit eingebracht. Und ich konnte leider nicht
+    nachvollziehen, wie $i$ und $u$ zusammenhängen.
+
+    Möglicherweise lässt sich auch zeigen, dass $|B_n|$ ein Teiler von $|\Z_n^*|$ ist. Dann würde nach Lagrange folgen, dass $B_n$ eine Teilmenge von $\Z_n^*$
+    ist. Allerdings konnte ich hier keine konkreten Aussagen über die Mächtigkeiten der beiden Gruppen treffen. Für die Mächtigkeit von $\Z_n^*$ gilt lediglich
+    $|\Z_n^*| = \varphi(n) = \varphi(p) \cdot \varphi(q)$, da gilt, dass $n = p \cdot q$ und $\ggt(p, q) = 1$. Über $|B_n|$ lässt sich möglicherweise über die
+    Ordnung des Elements $a$ argumentieren, da stets gilt, dass die Ordnung eine Teiler der Mächtigkeit ist. Auch hier fehlte mir der Zusammenhang von $u$ und $i$.
 \end{document}

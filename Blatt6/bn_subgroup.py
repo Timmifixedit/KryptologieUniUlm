@@ -20,20 +20,25 @@ def calc_u(n):
 
 
 def calc_b_n(u, k):
-    max_i = 0
     n = 2**u * k + 1
+    max_i = -1
+    b_i = n - 1
+    found = False
     for b in range(1, n):
         for i in range(u):
             if b**(2**i) % n == n - 1 and i > max_i:
                 max_i = i
+                b_i = b
+                found = True
 
+    assert found
     b_n = []
     for a in range(1, n):
         tmp = a**(k * 2**max_i) % n
         if tmp == 1 or tmp == n - 1:
             b_n.append(a)
 
-    return b_n, max_i
+    return b_n, max_i, b_i
 
 
 def ggt(a, b):
@@ -57,12 +62,14 @@ def main():
     print("n = %d" % n)
     u, k = calc_u(n)
     print("u = %d, k = %d" % (u, k))
-    b_n, i = calc_b_n(u, k)
+    b_n, i, b_i = calc_b_n(u, k)
     print("Subgroup B_n")
     print(b_n)
-    print("Where i = %d" % i)
+    print("Where i = %d with corresponding b = %d" % (i, b_i))
     print("Z_n*:")
-    print(calc_z_n_star(n))
+    z_n_star = calc_z_n_star(n)
+    print(z_n_star)
+    print("phi(%d) = %d" % (n, len(z_n_star)))
     for a in b_n:
         print("%d ^ %d = %d" % (a, k * 2**i, a**(k * 2**i) % n))
 

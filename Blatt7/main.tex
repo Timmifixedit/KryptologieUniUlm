@@ -98,15 +98,15 @@
     Diese Äquivalenz gilt ebenfalls für die modulare Exponentiation als wiederholte Anwendung der modularen Multiplikation.
     \begin{enumerate}[label=(\roman*)]
         \item $\ZZ \ x^{\varphi(n)/2} \congTo{1}{p}$ und $x^{\varphi(n)/2} \congTo{1}{q}$. \\
-              OBdA sei $x < p$ (Siehe allgemeine Begründung oben, \cref{eq:obda}). Es gilt also $x \in \Z_p^*$, da $p$ prim. Dann gilt für $a, k \in \Z$
+              OBdA sei $x < p$ (Siehe allgemeine Begründung oben, \cref{eq:obda}). Es gilt also $x \in \Z_p^*$, da $p$ prim. Dann gilt für $k \in \Z$
               auch folgendes:
               \begin{equation}
-                  x^{\varphi(q) \cdot k} \stackrel{p \ \text{prim}}{=} \left(x^{q - 1}\right)^k \congTo[\text{Fermat}]{1^k}{p} \congTo{1}{p}
+                  x^{\varphi(p) \cdot k} = \left(x^{\varphi(p)}\right)^k \congTo[\text{Fermat}]{1^k}{p} \congTo{1}{p}
                   \label{eq:fermatP}
               \end{equation}
               Da $q$ ungerade ist, ist $q - 1$ gerade und somit $\frac{q - 1}{2} \in \Z$. Deshalb gilt:
               \begin{equation}
-                  x^{\varphi(p) \cdot \frac{q - 1}{2}} = x^{(p - 1) \cdot (q - 1) / 2} = x^{\varphi(n) / 2} \congTo[\ref{eq:fermatP}]{1}{p}
+                  x^{\varphi(p) \cdot \frac{q - 1}{2}} = x^{\varphi(p) \cdot k} \congTo[\ref{eq:fermatP}]{1}{p}, \ \text{mit} \ k = \frac{q - 1}{2} \in \Z
               \end{equation}
               $x^{\varphi(n)/2} \congTo{1}{q}$ lässt sich analog zeigen. \Qed
         \item $\ZZ \ x^{\varphi(n)/2} \congTo{1}{n}$ \\
@@ -132,21 +132,26 @@
         \item TODO
     \end{enumerate}
     \section{Modulare Exponentiation die Zweite}
-    Sein  im Folgenden $p \neq q$ zwei Primzahlen, $n = p \cdot q$
+    Sein  im Folgenden $p \neq q$ zwei Primzahlen, $n = p \cdot q$. Es gilt also:
+    \begin{equation}
+        \varphi(n) \stackrel{\text{p, q \ \text{teilerfremd}}}{=} \varphi(p) \cdot \varphi(q) \stackrel{p, q \ \text{prim}}{=} (p - 1) \cdot (q - 1)
+        \label{eq:phi}
+    \end{equation}
     \begin{enumerate}[label=(\roman*)]
         \item $\ZZ$ für $a, k, m \in \Z :  m = k \cdot \varphi(n), \ \ggt(a, n) = 1$ gilt: $a^m \congTo{1}{p}$ \\ und $a^m \congTo{1}{q}$ \\
               \begin{align}
                   a^m &= a^{k \cdot \varphi(n)} = \left(a^{\varphi(n)}\right)^k = \left(a^{\varphi(p)}\right)^{k \cdot \varphi(q)} \\
-                  &= \left(a^{\varphi(p)}\right)^{\tilde{k}} \congTo[\ref{eq:fermatP}]{1}{p}
+                  &= \left(a^{\varphi(p)}\right)^{\tilde{k}} \congTo[\text{Fermat}]{1^{\tilde{k}}}{p} \congTo{1}{p}
               \end{align}
               $a^m \congTo{1}{q}$ folgt analog. \Qed
-        \item Für $a \in \Z$ mit $\ggt(a, n)\geq 1$ gilt $a^{m + 1} \congTo{a}{p}$ bzw. $a^{m + 1} \congTo{a}{q}$ mit
-              $m = k \cdot \varphi(n), \ k \in \Z$ nicht allgemein. \\
-              Gegenbeispiel: Sei $a = p$. Dann gilt:
-              \begin{align}
-                  a^{m + 1} &\congTo{a}{p} \Leftrightarrow a^{m + 1} = l \cdot p + a, \ l \in \Z \\
-                  \Leftrightarrow p^{m + 1} &= l \cdot p + p = \tilde{l} \cdot p, \ \tilde{l} = l + 1 \\
-                  \Leftrightarrow \tilde{l} &= p^m \lightning
-              \end{align}
+        \item Für $m$ wie in (i) gewählt und $a \in \Z$ beliebig gilt die Aussage
+              \begin{equation}
+                  a^{m + 1} \congTo{a}{p} \wedge a^{m + 1} \congTo{a}{q}
+              \end{equation}
+              nicht allgemein. \\
+              Gegenbeispiel: Wähle $a = p, \ k = a^m \in \Z$
+              \begin{equation}
+                  a^{m + 1} = a \cdot a^m = k \cdot a = k \cdot p \congTo{0}{p} \ \ \text{aber} \ 0 \stackrel{p \ \text{prim}}{\neq} p \ \lightning
+              \end{equation}
     \end{enumerate}
 \end{document} 

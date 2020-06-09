@@ -25,6 +25,7 @@
 \usepackage{bm}
 \usepackage{moresize}
 \usepackage{fancyvrb}
+\usepackage{stmaryrd}
 
 \newcommand{\Z}[0]{\mathbb{Z}}
 \newcommand{\N}[0]{\mathbb{N}}
@@ -100,7 +101,7 @@
               OBdA sei $x < p$ (Siehe allgemeine Begründung oben, \cref{eq:obda}). Es gilt also $x \in \Z_p^*$, da $p$ prim. Dann gilt für $a, k \in \Z$
               auch folgendes:
               \begin{equation}
-                  x^{\varphi(q) \cdot k} \stackrel{p \ \text{prim}}{=} \left(x^{q - 1}\right)^k \congTo[\text{Fermat}]{1^k}{p} = 1
+                  x^{\varphi(q) \cdot k} \stackrel{p \ \text{prim}}{=} \left(x^{q - 1}\right)^k \congTo[\text{Fermat}]{1^k}{p} \congTo{1}{p}
                   \label{eq:fermatP}
               \end{equation}
               Da $q$ ungerade ist, ist $q - 1$ gerade und somit $\frac{q - 1}{2} \in \Z$. Deshalb gilt:
@@ -112,12 +113,12 @@
               Es gilt:
               \begin{align}
                   x^{\varphi(n)} &= \left(x^{\varphi(n)/2}\right)^2 \congTo[\text{Fermat}]{1^2}{n} \\
-                  &\Rightarrow x^{\varphi(n)/2} \congTo{\pm 1}{n}
+                  \Rightarrow x^{\varphi(n)/2} &\congTo{\pm 1}{n}
               \end{align}
               Angenommen $x^{\varphi(n)/2} \congTo{-1}{n}$. Sei $y \in \Z : y \congTo{-1}{n}$. Daraus folgt für $k \in \Z$:
               \begin{align}
                   y &= k \cdot n - 1 = k p q - 1 = p \cdot (k \cdot q) - 1 = p \cdot \tilde{k} -1 \\
-                  &\Rightarrow y \congTo{-1}{p} \label{eq:mOneInP}
+                  \Rightarrow y &\congTo{-1}{p} \label{eq:mOneInP}
               \end{align}
               Dann folgt wiederum $x^{\varphi(n)/2} \congTo{- 1}{n} \Rightarrow x^{\varphi(n)/2} \congTo{- 1}{p}$. Dies widerspricht allerdings (i), 
               weshalb dann zwingendermaßen $x^{\varphi(n)/2} \congTo{1}{n}$ gelten muss. \Qed
@@ -128,5 +129,24 @@
                    &= x \cdot \left(x^{\varphi(n)/2}\right)^k \congTo[\text{ii}]{x \cdot 1^k}{n} \congTo{x}{n}
               \end{align}
               \Qed
+        \item TODO
+    \end{enumerate}
+    \section{Modulare Exponentiation die Zweite}
+    Sein  im Folgenden $p \neq q$ zwei Primzahlen, $n = p \cdot q$
+    \begin{enumerate}[label=(\roman*)]
+        \item $\ZZ$ für $a, k, m \in \Z :  m = k \cdot \varphi(n), \ \ggt(a, n) = 1$ gilt: $a^m \congTo{1}{p}$ \\ und $a^m \congTo{1}{q}$ \\
+              \begin{align}
+                  a^m &= a^{k \cdot \varphi(n)} = \left(a^{\varphi(n)}\right)^k = \left(a^{\varphi(p)}\right)^{k \cdot \varphi(q)} \\
+                  &= \left(a^{\varphi(p)}\right)^{\tilde{k}} \congTo[\ref{eq:fermatP}]{1}{p}
+              \end{align}
+              $a^m \congTo{1}{q}$ folgt analog. \Qed
+        \item Für $a \in \Z$ mit $\ggt(a, n)\geq 1$ gilt $a^{m + 1} \congTo{a}{p}$ bzw. $a^{m + 1} \congTo{a}{q}$ mit
+              $m = k \cdot \varphi(n), \ k \in \Z$ nicht allgemein. \\
+              Gegenbeispiel: Sei $a = p$. Dann gilt:
+              \begin{align}
+                  a^{m + 1} &\congTo{a}{p} \Leftrightarrow a^{m + 1} = l \cdot p + a, \ l \in \Z \\
+                  \Leftrightarrow p^{m + 1} &= l \cdot p + p = \tilde{l} \cdot p, \ \tilde{l} = l + 1 \\
+                  \Leftrightarrow \tilde{l} &= p^m \lightning
+              \end{align}
     \end{enumerate}
 \end{document} 

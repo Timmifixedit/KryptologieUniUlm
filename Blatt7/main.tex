@@ -36,11 +36,14 @@
 \newcommand{\ggt}{\text{ggT}}
 \newcommand{\kgv}{\text{kgV}}
 \newcommand{\rem}{\ \text{Rest} \ }
-\newcommand{\congTo}[2]{\equiv #1\mod #2}
+\newcommand{\congTo}[3][]{\stackrel{#1}{\equiv} #2\mod #3}
 \newcommand{\incfig}[2][\columnwidth]{%
     \def\svgwidth{#1}
     \import{./}{#2.eps_tex}
 }
+\newcommand{\Qed}{\begin{flushright}
+    q.e.d.
+\end{flushright}}
 
 %---------------------Stolen from https://github.com/aul12/Kryptologie/blob/master/Uebung01/main.tex
 \definecolor{deepblue}{rgb}{0,0,0.5}
@@ -82,4 +85,41 @@
 
 \begin{document}
     \maketitle
-\end{document}
+    \setcounter{section}{1}
+    \section{Modulare Exponentiation und $\mathbf{\bm{\varphi}(n)}$}
+    Im Folgenden gelte: $n = p \cdot q$ mit $p, q > 2$ prim, $p \neq q$. Es gelte oBdA $x \in \Z_n^*$. Wenn nicht, dann existiert wegen $\ggt(x, n) = 1$
+    ein $\tilde{x} : x \congTo{\tilde{x}}{n}$. Die Rechnung mit $\tilde{x}$ ist äquivalent zur Rechnung mit $x$, denn x lässt sich schreiben als 
+    $k \cdot n + \tilde{x}$. Dann gilt für die modulare Multiplikation:
+    \begin{equation}
+        a \cdot x \mod n = a \cdot (k \cdot n + \tilde{x}) \mod n = a k n + a \tilde{x} \mod n = a \cdot \tilde{x} \mod n 
+        \label{eq:obda}
+    \end{equation}
+    Diese Äquivalenz gilt ebenfalls für die modulare Exponentiation als wiederholte Anwendung der modularen Multiplikation.
+    \begin{enumerate}[label=(\roman*)]
+        \item $\ZZ \ x^{\varphi(n)/2} \congTo{1}{p}$ und $x^{\varphi(n)/2} \congTo{1}{q}$. \\
+              OBdA sei $x < p$ (Siehe allgemeine Begründung oben, \cref{eq:obda}). Es gilt also $x \in \Z_p^*$, da $p$ prim. Dann gilt für $a, k \in \Z$
+              auch folgendes:
+              \begin{equation}
+                  x^{\varphi(q) \cdot k} \stackrel{p \ \text{prim}}{=} \left(x^{q - 1}\right)^k \congTo[\text{Fermat}]{1^k}{p} = 1
+                  \label{eq:fermatP}
+              \end{equation}
+              Da $q$ ungerade ist, ist $q - 1$ gerade und somit $\frac{q - 1}{2} \in \Z$. Deshalb gilt:
+              \begin{equation}
+                  x^{\varphi(p) \cdot \frac{q - 1}{2}} = x^{(p - 1) \cdot (q - 1) / 2} = x^{\varphi(n) / 2} \congTo[\ref{eq:fermatP}]{1}{p}
+              \end{equation}
+              $x^{\varphi(n)/2} \congTo{1}{q}$ lässt sich analog zeigen. \Qed
+        \item $\ZZ \ x^{\varphi(n)/2} \congTo{1}{n}$ \\
+              Es gilt:
+              \begin{align}
+                  x^{\varphi(n)} &= \left(x^{\varphi(n)/2}\right)^2 \congTo[\text{Fermat}]{1^2}{n} \\
+                  &\Rightarrow x^{\varphi(n)/2} \congTo{\pm 1}{n}
+              \end{align}
+              Angenommen $x^{\varphi(n)/2} \congTo{-1}{n}$. Sei $y \in \Z : y \congTo{-1}{n}$. Daraus folgt für $k \in \Z$:
+              \begin{align}
+                  y &= k \cdot n - 1 = k p q - 1 = p \cdot (k \cdot q) - 1 = p \cdot \tilde{k} -1 \\
+                  &\Rightarrow y \congTo{-1}{p} \label{eq:mOneInP}
+              \end{align}
+              Dann folgt wiederum $x^{\varphi(n)/2} \congTo{- 1}{n} \Rightarrow x^{\varphi(n)/2} \congTo{- 1}{p}$. Dies widerspricht allerdings (i), 
+              weshalb dann zwingendermaßen $x^{\varphi(n)/2} \congTo{1}{n}$ gelten muss. \Qed
+    \end{enumerate}
+\end{document} 

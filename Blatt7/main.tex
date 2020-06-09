@@ -121,5 +121,12 @@
               \end{align}
               Dann folgt wiederum $x^{\varphi(n)/2} \congTo{- 1}{n} \Rightarrow x^{\varphi(n)/2} \congTo{- 1}{p}$. Dies widerspricht allerdings (i), 
               weshalb dann zwingendermaßen $x^{\varphi(n)/2} \congTo{1}{n}$ gelten muss. \Qed
+        \item $\ZZ \ e \cdot d \congTo{1}{\frac{\varphi(n)}{2}} \Rightarrow x^{e \cdot d} \congTo{x}{n}$. \\
+              Offensichtlich gilt: $e \cdot d = \frac{k \cdot \varphi(n)}{2} + 1, \ k \in \Z$. Daraus folgt:
+              \begin{align}
+                  x^{e \cdot d} &= x^{\frac{k \cdot \varphi(n)}{2} + 1} = x \cdot x^{\frac{k \cdot \varphi(n)}{2}} \\
+                   &= x \cdot \left(x^{\varphi(n)/2}\right)^k \congTo[\text{ii}]{x \cdot 1^k}{n} \congTo{x}{n}
+              \end{align}
+              \Qed
     \end{enumerate}
 \end{document} 

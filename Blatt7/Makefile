@@ -8,7 +8,7 @@ Blatt7: all
 	mv main.pdf Blatt7TimLuchterhand.pdf
 
 
-release: 7latt6
+release: Blatt7
 
 clean:
 	$(LATEXMK) -c

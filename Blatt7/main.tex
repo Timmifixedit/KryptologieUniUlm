@@ -129,7 +129,8 @@
                    &= x \cdot \left(x^{\varphi(n)/2}\right)^k \congTo[\text{ii}]{x \cdot 1^k}{n} \congTo{x}{n}
               \end{align}
               \Qed
-        \item TODO
+        \item Wenn die Nachricht $x$ teilerfremd zu $n$ ist, dann kann der Entschlüsselungsexponent $d$ auch als das Inverse zu $e \mod \frac{\varphi(n)}{2}$
+              berechnet werden.
     \end{enumerate}
     \section{Modulare Exponentiation die Zweite}
     Sein  im Folgenden $p \neq q$ zwei Primzahlen, $n = p \cdot q$. Es gilt also:
@@ -139,6 +140,7 @@
     \end{equation}
     \begin{enumerate}[label=(\roman*)]
         \item $\ZZ$ für $a, k, m \in \Z :  m = k \cdot \varphi(n), \ \ggt(a, n) = 1$ gilt: $a^m \congTo{1}{p}$ \\ und $a^m \congTo{1}{q}$ \\
+              Aus $\ggt(a, n) = 1$ folgt $\ggt(a, p) = \ggt(a, q) = 1$ und deshalb:
               \begin{align}
                   a^m &= a^{k \cdot \varphi(n)} = \left(a^{\varphi(n)}\right)^k \stackrel{\ref{eq:phi}}{=} \left(a^{\varphi(p)}\right)^{k \cdot \varphi(q)} \\
                   &= \left(a^{\varphi(p)}\right)^{\tilde{k}} \congTo[\text{Fermat}]{1^{\tilde{k}}}{p} \congTo{1}{p}
@@ -150,8 +152,10 @@
               \begin{align}
                   \label{eq:ggtP}
                   a^{m + 1} &= a \cdot a^m = a \cdot l \congTo{0}{p} \ \text{mit} \ l = a^m \in \Z \Rightarrow a^{m + 1} \congTo{a}{p} \\
-                  a^{m + 1} &= a \cdot a^m = a \cdot a^{k \cdot \varphi(n)} \stackrel{\ref{eq:phi}}{=} a \cdot \left(a^{\varphi(q)}\right)^{k \cdot \varphi(p)}
-                  \congTo{a \cdot 1^{k \cdot \varphi(p)}}{q} \congTo{a}{q}
+                  \begin{split}
+                      a^{m + 1} &= a \cdot a^m = a \cdot a^{k \cdot \varphi(n)} \stackrel{\ref{eq:phi}}{=} a \cdot \left(a^{\varphi(q)}\right)^{k \cdot \varphi(p)}
+                      \congTo[\ggt(a, q) = 1]{a \cdot 1^{k \cdot \varphi(p)}}{q} \\ &\congTo{a}{q} 
+                  \end{split}
               \end{align}
               Der Fall $\ggt(a, n) = q$ folgt analog. Falls gilt, dass $a = l \cdot n, \ l \in \Z$, dann folgt $a \congTo{0}{q} \wedge a \congTo{0}{q}$ und
               die Behauptung folgt analog zu \cref{eq:ggtP}. Für $\ggt(a, n) = 1$ folgt die Behauptung aus (i), indem beide Seiten mit $a$ multipliziert werden. \Qed
@@ -170,11 +174,13 @@
                   &\stackrel{\ggt(\tilde{a}, q) = 1}{\Leftrightarrow} a^m \congTo{1}{q} \\
                   &\Leftrightarrow a^{m + 1} \congTo{a}{q} \label{eq:taut}
               \end{align}
-              Die Behauptung führt also auf \cref{eq:taut} und das ist nach (i) eine Tautologie. Für den Fall $a = l \cdot n, \ l \in \Z$ folgt
+              Die Behauptung führt also auf \cref{eq:taut} und das ist nach (ii) eine Tautologie. Für den Fall $a = l \cdot n, \ l \in \Z$ folgt
               $a \congTo{0}{n}$ und deshalb gilt:
               \begin{equation}
                   a^{ed} = a \cdot a^{k \cdot \varphi(n)} = a \cdot s \congTo{0}{n}, \ s = a^{k \cdot \varphi(n)} \in \Z \Rightarrow a^{ed} \congTo{a}{n}
               \end{equation}
               \Qed
+        \item Aus den vorherigen Teilaufgaben folgt, dass eine beliebige Nachricht $a$ ver- und wieder entschlüsselt werden kann, unabhängig davon, ob sie teilerfremd
+              zu $n$ ist.
     \end{enumerate}
 \end{document} 

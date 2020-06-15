@@ -88,6 +88,16 @@
     \maketitle
     \setcounter{section}{1}
     \section{Hashfunktionen}
+    Für die Hashfunktionen $f, g, h$ gelte: $h = f \circ g$, $h$ ist stark kollisionsresistent. \\
+    $\ZZ \ g$ ist stark kollisionsresistent. \\
+    Beweis per Widerspruch: Angenommen $g$ ist nicht stark kollisionsresistent. Dann lassen sich $x, x'$ mit $x \neq x' \wedge g(x) = g(x') = y$ ohne größeren
+    Aufwand finden. Für diese $x$ und $x'$ gilt aber außerdem:
+    \begin{equation*}
+        h(x) = (f \circ g)(x) = f(g(x)) = f(y) \stackrel{(*)}{=} f(g(x')) = h(x')
+    \end{equation*}
+    Zu (*): $f$ ist eine deterministische Funktion $\Rightarrow f(y) = f(x)$ für $y=x$. D.h. für $x$ und $x'$ weißt $h$ eine Kollision auf. Um solch eine Kollision
+    bei $h$ zu finden, genügt es also eine bei $g$ zu finden und das ist ohne größeren Aufwand möglich. Daraus folgt, dass $h$ ebenfalls nicht stark kollisionsresistent
+    ist. $\lightning$ \\ Aus diesem Widerspruch folgt die Behauptung. \Qed
     \section{Blinde Unterschrift mit RSA}
     Es wird angenommen, dass Teilnehmer B die Nachricht $m$ von Teilnehmer A (evtl. Tippfehler in der Aufgabenstellung) blind signieren lassen möchte.
     Diese Aufgabe wurde durch das folgende Python-Skript gelöst:

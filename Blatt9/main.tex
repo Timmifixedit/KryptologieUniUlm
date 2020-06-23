@@ -1,0 +1,124 @@
+\documentclass[DIN, pagenumber=false, fontsize=11pt, parskip=half]{scrartcl}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc} 
+\usepackage{commath}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{tikz-timing}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{xstring}
+\usepackage{circuitikz}
+\usepackage{listings}
+\usepackage[final]{pdfpages}
+\usepackage{subcaption}
+\usepackage{import}
+\usepackage[german]{cleveref}
+\usepackage{bm}
+\usepackage{moresize}
+\usepackage{fancyvrb}
+\usepackage{stmaryrd}
+
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\N}[0]{\mathbb{N}}
+\newcommand{\R}[0]{\mathbb{R}}
+\newcommand{\ZZ}{\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}}
+\newcommand{\gq}[1]{\grqq #1\glqq}
+\newcommand{\Ent}{\text{H}}
+\newcommand{\MI}{\text{I}}
+\newcommand{\ggt}{\text{ggT}}
+\newcommand{\kgv}{\text{kgV}}
+\newcommand{\rem}{\ \text{Rest} \ }
+\newcommand{\congTo}[3][]{\stackrel{#1}{\equiv} #2\mod #3}
+\newcommand{\incfig}[2][\columnwidth]{%
+    \def\svgwidth{#1}
+    \import{./}{#2.eps_tex}
+}
+\newcommand{\Qed}{\begin{flushright}
+    q.e.d.
+\end{flushright}}
+
+%---------------------Stolen from https://github.com/aul12/Kryptologie/blob/master/Uebung01/main.tex
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\newcommand\pythonstyle{\lstset{
+    language=Python,
+    basicstyle=\scriptsize,
+    otherkeywords={self},             % Add keywords here
+    keywordstyle=\color{deepblue},
+    emph={MyClass,__init__},          % Custom highlighting
+    emphstyle=\color{deepred},    % Custom highlighting style
+    stringstyle=\color{deepgreen},
+    frame=tb,                         % Any extra options here
+    showstringspaces=false,            % 
+}}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+%--------------------------------------
+
+\title{Kryptologie Blatt 9}
+\author{Tim Luchterhand}
+
+\begin{document}
+    \maketitle
+    \section{Graphisomorphie}
+    \begin{enumerate}[label=\alph*)]
+        \item $ $
+              \begin{figure}[H]
+                \centering
+                  \begin{subfigure}[l]{0.49\textwidth}
+                    \centering
+                      \incfig[\textwidth]{G1}
+                      \caption{Graph $G_1$}
+                  \end{subfigure}  
+                  \begin{subfigure}[l]{0.49\textwidth}
+                    \centering
+                      \incfig[\textwidth]{H}
+                      \caption{Graph $H$}
+                  \end{subfigure}  
+              \end{figure}
+        \item Im Falle von $b = 1$ sendet P die Permutation $\sigma$, die bereits auf dem Blatt angegeben ist.
+    \end{enumerate}
+
+    \section{Arbeitsbeschaffungsmaßnahme für Oberhuber}
+    \begin{enumerate}[label=\alph*)]
+        \item In diesem Fall müsste Peter $z = y$ gesendet haben, wobei für $y$ gelten muss: $y^2 \congTo{\tilde{y}}{n}$ Nachrechnen ergibt:
+              \begin{equation*}
+                  y^2 = z^2 \hat{=} \ 63^2 \congTo{42}{77} = \tilde{y}
+              \end{equation*}
+              Peter hat also die korrekte Antwort gesendet.
+        \item Hier müsste Peter $z = x \circ y$ gesendet haben. Dies entspricht konkret $z = x \cdot y \mod n$. Oberhuber muss nun prüfen, ob
+              $\tilde{x} \cdot \tilde{y} \congTo[?]{z^2}{n}$. Nachrechnen:
+              \begin{equation*}
+                  \tilde{x} \cdot \tilde{y} \hat{=} \ 37 \cdot 15 \congTo{16}{77} \not\congTo{64}{n}
+              \end{equation*}
+              Peter ist also kein legitimer Prover. Es fällt außerdem aber auf, dass $z^2 \congTo{15}{n}$. $z$ ist also eine Quadratwurzel von
+              $\tilde{y}$. Peter hat also als nicht legitimer Prover gehofft, dass Oberhuber nur die Challenge $b = 0$ erwartet, auf die er
+              wie auch schon beim ersten mal die Antwort parat gehabt hätte.
+    \end{enumerate}
+\end{document}

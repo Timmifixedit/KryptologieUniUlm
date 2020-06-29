@@ -1,0 +1,157 @@
+\documentclass[DIN, pagenumber=false, fontsize=11pt, parskip=half]{scrartcl}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc} 
+\usepackage{commath}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{tikz-timing}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{xstring}
+\usepackage{circuitikz}
+\usepackage{listings}
+\usepackage[final]{pdfpages}
+\usepackage{subcaption}
+\usepackage{import}
+\usepackage[german]{cleveref}
+\usepackage{bm}
+\usepackage{moresize}
+\usepackage{fancyvrb}
+\usepackage{stmaryrd}
+
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\N}[0]{\mathbb{N}}
+\newcommand{\R}[0]{\mathbb{R}}
+\newcommand{\ZZ}{\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}}
+\newcommand{\gq}[1]{\grqq #1\glqq}
+\newcommand{\Ent}{\text{H}}
+\newcommand{\MI}{\text{I}}
+\newcommand{\ggt}{\text{ggT}}
+\newcommand{\kgv}{\text{kgV}}
+\newcommand{\rem}{\ \text{Rest} \ }
+\newcommand{\congTo}[3][]{\stackrel{#1}{\equiv} #2\mod #3}
+\newcommand{\incfig}[2][\columnwidth]{%
+    \def\svgwidth{#1}
+    \import{./}{#2.eps_tex}
+}
+\newcommand{\Qed}{\begin{flushright}
+    q.e.d.
+\end{flushright}}
+
+%---------------------Stolen from https://github.com/aul12/Kryptologie/blob/master/Uebung01/main.tex
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\newcommand\pythonstyle{\lstset{
+    language=Python,
+    basicstyle=\scriptsize,
+    otherkeywords={self},             % Add keywords here
+    keywordstyle=\color{deepblue},
+    emph={MyClass,__init__},          % Custom highlighting
+    emphstyle=\color{deepred},    % Custom highlighting style
+    stringstyle=\color{deepgreen},
+    frame=tb,                         % Any extra options here
+    showstringspaces=false,            % 
+}}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+%--------------------------------------
+
+\title{Kryptologie Blatt 10}
+\author{Tim Luchterhand}
+
+\begin{document}
+    \maketitle
+    \section{Schwellwertsystem}
+    Angenommen wird, dass die Teilschlüssel durch ein Shamir-Schwellwertsystem erzeugt wurden. Um nun an den Schlüssel zu kommen, muss das
+    Polynom $P(x) = z_2 x^2 + z_1 x + c$ bestimmt werden, sodass alle gegebenen Punkte eine Lösung des Polynoms sind. Der gesuchte Schlüssel ist
+    dann $P(0) = c$. Folgende Gleichungen gelten:
+    \begin{align}
+        z_2 + z_1 + c \congTo[!]{1}{13} \\
+        25 z_2 + 5 z_1 + c \congTo{12 z_2 + 5 z_1 + c}{13} \congTo[!]{5}{13}\\
+        144 z_2 + 12 z_1 + c \congTo{z_2 + 12 z_1 + c}{13} \congTo[1]{3}{13}
+    \end{align}
+    Aus (3) - (1) folgt $11 z_1 \congTo{9}{13}$. Berechne das Inverse zu $11 \mod 13$:
+    \begin{align*}
+        13 &= 1 \cdot 11 + 2 \\
+        11 &= 5 \cdot2 + 1 \\
+        1 &= 11 - 5 \cdot (13 - 1 \cdot 11) = -5 \cdot 13 + 6 \cdot 11 \\
+        &\Rightarrow 11^{-1} \congTo{6}{13}
+    \end{align*}
+    Damit folgt, dass $z_1 = 9 \cdot 6 \congTo{10}{23}$. Aus (2) + (3) folgt:
+    \begin{align*}
+        13 z_2 + 17 z_1 + 2 c \congTo{8}{13} \\
+        \Leftrightarrow 4 z_1 + 2 c \congTo{8}{13} \\ 
+        \hat{\Leftrightarrow} \ 40 + 2 c \congTo{8}{13} \\
+        \Leftarrow 1 + 2 c \congTo{8}{13} \\
+        \Leftrightarrow 2 c \congTo{7}{13}
+    \end{align*}
+    Das Inverse zu $2 \mod 13$ ist 7. $\Rightarrow c = 7 \cdot 7 \congTo{10}{13}$
+    Das Geheimnis ist als 10.
+
+    \section{Elliptische Kurve}
+    $y^2 \congTo{x^3+x}{23}$
+    \begin{enumerate}[label=\alph*)]
+        \item Prüfe, ob die Punkte $(9, 18)$ und $(3, 10)$ auf der Kurve liegen durch Nachrechnen:
+              \begin{equation*}
+                  18^2 = 324 \congTo{2}{23} \ \wedge \ 9^3 + 9 = 738 \congTo{2}{23}
+              \end{equation*}
+              $\Rightarrow$ der erste Punkt liegt auf der Kurve.
+              \begin{equation*}
+                  10^2 = 100 \congTo{8}{23} \ \wedge \ 3^3 + 3 = 30 \congTo{7}{23}
+              \end{equation*}
+              Der zweite Punkt liegt nicht auf der Kurve.
+        \item Zunächst wird die Steigung $\lambda$ zwischen den beiden Punkten $P$ und $Q$ berechnet:
+              \begin{equation*}
+                  \lambda = (y_2 - y_1) \cdot (x_2 - x_1)^{-1} \hat{=} (5 - 5) \cdot (5 - 1)^{-1} = 0
+              \end{equation*}
+              Die endgültigen Koordinaten $(x_3, y_3)$ ergeben sich dann durch:
+              \begin{align*}
+                  x_3 &= \lambda^2 - x_1 - x_2 \hat{=} -1 - 9 \congTo{13}{23} \\
+                  y_3 &= \lambda \cdot (x_1 - x_3) - y_1 \hat{=} -5 \congTo{18}{23} \\
+                  &\Rightarrow P \diamond Q = (13, 18)
+              \end{align*}
+        \item Hier berechnet sich $\lambda$ durch:
+              \begin{equation*}
+                  \lambda = (3 \cdot x_1^2 + a) \cdot (2 \cdot y_1) \hat{=} (3 \cdot 1^2 + 1) \cdot (2 \cdot 5) = 4 \cdot 10^{-1}
+              \end{equation*}
+              Berechne das multiplikative Inverse zu $10 \mod 23$ durch den extggT:
+              \begin{align*}
+                  23 &= 2 \cdot 10 + 3 \\
+                  10 &= 3 \cdot 3 + 1  \\
+                  1 &= 10 - 3 \cdot 3 = 10 - 3 \cdot (23 - 2 \cdot 10) \\
+                  &= 10 - 3 \cdot 23 + 6 \cdot 10 = -3 \cdot 23 + 7 \cdot 10 \\
+                  &\Rightarrow 10^{-1} \congTo{7}{23} \Rightarrow \lambda = 4 \cdot 7 \congTo{5}{23}
+              \end{align*}
+              $(x_3, y_3)$ berechnen sich dann analog zu b) zu:
+              \begin{align*}
+                  x_3 &= 5^2 - 1 - 1 = 23 \congTo{0}{23} \\
+                  y_3 &= 5 \cdot (1 - 0) - 5 = 0 \\
+                  &\Rightarrow P^2 = (0, 0)
+              \end{align*}
+    \end{enumerate}
+\end{document}
